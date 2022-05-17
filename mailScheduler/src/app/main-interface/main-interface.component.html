@@ -1,0 +1,14 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-toolbar color="primary">
+
+    <a href="" routeLink="home" style="color: inherit;text-decoration: none;"><span>Mail Scheduler</span></a>
+    <div class="evenspace"></div>
+    
+    <span *ngIf="accountName"><mat-icon style="margin-right: 8px;">settings</mat-icon>{{accountName}}</span>
+    <a href="" mat-icon-button style="margin-right: 40px; margin-left: 20px;" routeLink="home">
+      <mat-icon>logout</mat-icon><span>Logout</span>
+    </a>
+  </mat-toolbar>
+  <!-- Add Content Here -->
+  <app-accounts (accName)="Name($event)"></app-accounts>
+</mat-sidenav-container>

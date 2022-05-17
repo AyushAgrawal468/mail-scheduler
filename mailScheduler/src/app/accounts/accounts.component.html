@@ -1,0 +1,128 @@
+<div class="col-md-3" style="float: left;">
+    <button mat-button style="width: 100%; margin: 10px;padding-top:15px ;text-align: left;" (click)=addAccDialog()>
+        <h2>
+            <mat-icon>add</mat-icon> Add Account
+        </h2>
+        <hr>
+    </button>
+    
+    <div style="width: 100%;">
+        <mat-icon style="display: block;margin-top: -2px;size: 10%;float: left;margin-left: 30px;">person</mat-icon>
+        Accounts
+    </div>
+    <br>
+    <button mat-button style="width:100%;margin-bottom: 5px;" *ngFor="let account of accounts">
+        <div style="line-height:110%;height: 100%;padding: 5%;text-align: left;background-color: dimgray;"
+            (click)=accountName(account.accountName,account.id)>
+            {{account.accountName}}
+            <br>
+            {{account.email}}
+        </div>
+    </button>
+</div>
+
+
+
+<!-- emails -->
+
+<div class="col-md-3" style="float: left ; margin-left: 30px;position:sticky;">
+    <mat-tab-group>
+        <mat-tab label="Scheduled Email">
+            <div *ngFor="let email of emails">
+                <button mat-button style="width:100%;margin-bottom: 5px;"
+                    *ngIf="email.mailConfigurationId == accountId">
+                    <div style="line-height:110%;height: 100%;padding: 5%;text-align: left;" (click)=emailData(email)>
+                        {{email.to}} <br> {{email.subject}} <br> {{email.body}}
+                        <span style="display: block;margin-left: 450px;margin-top: -40px;"><mat-icon>event</mat-icon> {{email.scheduledTime}}</span>
+                    </div>
+                </button>
+            </div>
+        </mat-tab>
+        <mat-tab label="Sent Email"> Content 2 </mat-tab>
+    </mat-tab-group>
+</div>
+
+
+<!-- EmailForm -->
+
+<div class="col-md-5" style="float: left;margin-left: 30px;position: sticky;margin-top: 20px;">
+    <h2>Scheduled E-mail</h2>
+    <form [formGroup]="emailForm">
+        <div >
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label for="to">To</mat-label>
+                <input matInput placeholder="To" id="to" formControlName="to">
+            </mat-form-field>
+
+        </div>
+
+        <div *ngIf="to.invalid && (to.dirty||to.touched)" class="alert alert-danger">
+            <div *ngIf="to.errors?.['required']" style="color: red;">
+                email id is required.
+            </div>
+        </div>
+        <br>
+        <div>
+            <div>
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label for="CC">CC</mat-label>
+                    <input matInput placeholder="cc" id="cc" formControlName="cc">
+                </mat-form-field>
+
+            </div>
+        </div>
+        <br>
+        <div>
+            <div>
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label for="bcc">BCC</mat-label>
+                    <input matInput placeholder="bcc" id="bcc" formControlName="bcc">
+                </mat-form-field>
+
+
+            </div>
+        </div>
+        <br>
+        <div>
+            <div>
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label for="subject">Subject</mat-label>
+                    <input matInput placeholder="subject" id="subject" formControlName="subject">
+                </mat-form-field>
+
+
+            </div>
+        </div>
+        <br>
+        <div>
+            <div>
+                <mat-form-field appearance="fill"style="width: 100%;">
+                    <mat-label for="body">Body</mat-label>
+                    <textarea matInput placeholder="body" id="body" formControlName="body"></textarea>
+                </mat-form-field>
+
+
+            </div>
+        </div>
+        <br>
+        <div>
+            <div >
+                <mat-form-field appearance="fill" style="width: 45%;margin-left: 2.5%;">
+                    <mat-label for="scheduledDate">Schedule Date</mat-label>
+                    <input matInput type="date" placeholder="scheduledDate" id="scheduledDate"
+                        formControlName="scheduledDate">
+                </mat-form-field>
+                <mat-form-field appearance="fill" style="width: 45%;margin-left: 5%;">
+                    <mat-label for="scheduledTime">Schedule Time</mat-label>
+                    <input matInput type="time" placeholder="Scheduled Time" id="scheduledTime"
+                        formControlName="scheduledTime">
+                </mat-form-field>
+
+
+            </div>
+        </div>
+
+        <button mat-raised-button type="submit" class="btn btn-warning" [disabled]=!emailForm.valid (click)="submitForm()"style="margin-left: 10px;">Submitt</button>
+        <button mat-raised-button color="primary" style="margin-left: 195px;" (click)="discardMail()">Discard Email </button>
+    </form>
+</div>

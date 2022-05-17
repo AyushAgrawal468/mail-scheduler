@@ -1,0 +1,103 @@
+<div style="width: 500px;">
+    <h2 mat-dialog-title>Add Account Form</h2>
+    <mat-dialog-content class="mat-typography">
+
+        <form action="submit" #registerForm="ngForm">
+            <div class="form-group">
+                <mat-form-field class="col-md-12" appearance="fill">
+                    <mat-label>Account Name</mat-label>
+                    <input matInput name="accountName" [(ngModel)]="formData.accountName" type="text" class="form-control"
+                        #accountName="ngModel" placeholder="Account Name" required />
+                </mat-form-field>
+            </div>
+            <h2>Crendentials</h2>
+            <div class="form-group">
+                <mat-form-field class="col-md-12" appearance="standard">
+                    <input matInput name="email" [(ngModel)]="formData.email" type="text" class="form-control"
+                        #email="ngModel" placeholder="E-mail" required maxlength="50" />
+                </mat-form-field>
+            </div>
+
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger col-md-12">
+                <div *ngIf="email.errors?.['required']">
+                    Email is required
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <mat-form-field class="col-md-12" appearance="standard">
+                    <input matInput name="password" [(ngModel)]="formData.password" type="password" class="form-control"
+                        #password="ngModel" placeholder="Password" required maxlength="50" />
+                </mat-form-field>
+
+            </div>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger col-md-6">
+                <div *ngIf="password.errors?.['required']">
+                    Password is required
+                </div>
+            </div>
+
+            <h2>Incomming Server Details</h2>
+            
+            <div class="form-group">
+                <mat-form-field class="col-md-12" appearance="standard">
+                    <input matInput name="incomingServer" [(ngModel)]="formData.incomingServer" type="text" class="form-control"
+                        #incomingServer="ngModel" placeholder="Incoming Server" required />
+                </mat-form-field>
+
+            </div>
+            <div *ngIf="incomingServer.invalid && (incomingServer.dirty || incomingServer.touched)" class="alert alert-danger col-md-12">
+                <div *ngIf="incomingServer.errors?.['required']">
+                    Server is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <mat-form-field class="col-md-12" appearance="standard">
+                    <input matInput name="incomingServerPort" [(ngModel)]="formData.incomingServerPort" type="text" class="form-control"
+                        #incomingServerPort="ngModel" placeholder="Incoming Server Port" required />
+                </mat-form-field>
+
+            </div>
+            <div *ngIf="incomingServerPort.invalid && (incomingServerPort.dirty || incomingServerPort.touched)" class="alert alert-danger col-md-12">
+                <div *ngIf="incomingServerPort.errors?.['required']">
+                    Server Port is required
+                </div>
+            </div>
+
+            <h2>Outgoing Server Details</h2>
+            
+            <div class="form-group">
+                <mat-form-field class="col-md-12" appearance="standard">
+                    <input matInput name="outgoingServer" [(ngModel)]="formData.outgoingServer" type="text" class="form-control"
+                        #outgoingServer="ngModel" placeholder="Outgoing Server" required />
+                </mat-form-field>
+
+            </div>
+            <div *ngIf="outgoingServer.invalid && (outgoingServer.dirty || outgoingServer.touched)" class="alert alert-danger col-md-12">
+                <div *ngIf="outgoingServer.errors?.['required']">
+                    Outgoing Server is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <mat-form-field class="col-md-12" appearance="standard">
+                    <input matInput name="outgoingServerPort" [(ngModel)]="formData.outgoingServerPort" type="text" class="form-control"
+                        #outgoingServerPort="ngModel" placeholder="Outgoing Server Port" required />
+                </mat-form-field>
+
+            </div>
+            <div *ngIf="outgoingServerPort.invalid && (outgoingServerPort.dirty || outgoingServerPort.touched)" class="alert alert-danger col-md-12">
+                <div *ngIf="outgoingServerPort.errors?.['required']">
+                   Outgoing Server Port is required
+                </div>
+            </div>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button (click)=onNoClick()>Cancel</button>
+        <button mat-raised-button color="primary" [mat-dialog-close]="true" (click)=submitRes()
+            cdkFocusInitial>Submit</button>
+    </mat-dialog-actions>
+</div>
